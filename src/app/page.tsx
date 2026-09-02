@@ -11,45 +11,44 @@ import {
   Terminal, 
   ExternalLink 
 } from 'lucide-react';
-import DioramaCanvas from '@/components/DioramaCanvas';
+import DynamicCursorGrid from '@/components/DynamicCursorGrid';
+import ParticleText from '@/components/ParticleText';
 import { PERSONAL_INFO, PROJECTS, EXPERIENCE, SKILLS } from '@/data/portfolio';
 
 export default function SplitDashboard() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col lg:flex-row font-sans selection:bg-violet-500/30">
+    <div className="min-h-screen w-full bg-zinc-950 text-zinc-100 flex flex-col items-center font-sans selection:bg-violet-500/30 relative">
       
-      {/* LEFT COLUMN: Sticky Sidebar */}
-      <aside className="w-full lg:w-[400px] xl:w-[450px] lg:h-screen lg:sticky lg:top-0 border-r border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl flex flex-col p-6 lg:p-8 gap-8 z-20 shadow-2xl">
-        
-        {/* 3D Diorama Widget */}
-        <div className="h-[250px] sm:h-[300px] w-full rounded-2xl overflow-hidden border border-zinc-800/80 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative shrink-0">
-          <DioramaCanvas />
+      {/* Dynamic Cursor Grid Background */}
+      <DynamicCursorGrid />
+
+      {/* HERO SECTION */}
+      <section className="w-full min-h-[60vh] flex flex-col items-center justify-center relative z-10 pt-20">
+        <div className="w-full h-[40vh] flex items-center justify-center px-4">
+          <ParticleText 
+            text="MAHARSHI KARPATIYA" 
+            color="#ffffff" 
+            highlightColor="#3b82f6" 
+            fontSize="12vw" 
+            fontWeight={700}
+            fontFamily="Geist"
+            particleSize={1.5}
+            density={5}
+            glow={true}
+            className="w-full h-full pointer-events-auto"
+          />
         </div>
 
-        {/* Profile Info */}
-        <div className="flex flex-col flex-1 justify-between gap-6">
-          <div>
-            <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-2">
-              {PERSONAL_INFO.name}
-            </h1>
-            <p className="text-zinc-400 font-medium flex items-center gap-2 mb-2">
-              <Briefcase size={16} className="text-violet-400" /> Full Stack Developer
-            </p>
-            <p className="text-zinc-400 font-medium flex items-center gap-2">
-              <MapPin size={16} className="text-emerald-400" /> {PERSONAL_INFO.education.location}
-            </p>
-            
-            {/* Status Badge */}
-            <div className="mt-8 inline-flex items-center gap-3 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-              </span>
-              <span className="text-emerald-400 text-sm font-bold tracking-wide uppercase">Available for Hire</span>
-            </div>
+        <div className="flex flex-col items-center gap-6 -mt-10 sm:-mt-16 relative z-20">
+          <div className="flex flex-wrap justify-center gap-6 text-zinc-400 font-medium">
+            <span className="flex items-center gap-2">
+              <Briefcase size={18} className="text-violet-400" /> Full Stack Developer
+            </span>
+            <span className="flex items-center gap-2">
+              <MapPin size={18} className="text-emerald-400" /> {PERSONAL_INFO.education.location}
+            </span>
           </div>
 
-          {/* Social Links */}
           <div className="flex items-center gap-4">
             <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-violet-500/50 hover:text-violet-400 transition-all shadow-sm">
               <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
@@ -61,27 +60,20 @@ export default function SplitDashboard() {
               <Mail size={20} />
             </a>
           </div>
-
-          {/* Contact Button */}
-          <a 
-            href={`mailto:${PERSONAL_INFO.email}`} 
-            className="w-full py-4 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold text-center transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] active:scale-[0.98]"
-          >
-            Contact Me
-          </a>
         </div>
-      </aside>
+      </section>
 
-      {/* RIGHT COLUMN: Scrolling Content */}
-      <main className="flex-1 min-w-0 overflow-x-hidden p-6 lg:p-12 xl:p-16 space-y-32 bg-zinc-950">
+      {/* MAIN CONTENT STACK */}
+      <main className="w-full max-w-5xl px-6 lg:px-12 flex flex-col items-center mt-8 sm:mt-16 space-y-24 relative z-10 pb-32">
         
         {/* Terminal Hero Section */}
-        <section>
+        <section className="w-full">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-2xl bg-[#0c0c0e] border border-zinc-800/80 p-6 lg:p-8 shadow-2xl font-mono text-sm sm:text-base overflow-hidden relative"
+            className="rounded-2xl bg-[#0c0c0e]/90 backdrop-blur-md border border-zinc-800/80 p-6 lg:p-8 shadow-2xl font-mono text-sm sm:text-base overflow-hidden relative"
           >
             {/* Fake macOS window controls */}
             <div className="flex gap-2 mb-6">
@@ -97,7 +89,8 @@ export default function SplitDashboard() {
                 visible: { opacity: 1, transition: { staggerChildren: 0.4 } }
               }}
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: true }}
               className="space-y-6 text-zinc-300"
             >
               <motion.div variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}>
@@ -122,12 +115,12 @@ export default function SplitDashboard() {
         </section>
 
         {/* Projects Bento Grid */}
-        <section>
+        <section className="w-full">
           <h2 className="text-3xl font-bold text-white mb-10 flex items-center gap-3">
             <Code className="text-violet-500" size={32} /> Featured Projects
           </h2>
           
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PROJECTS.map((project, i) => (
               <motion.div
                 key={project.title}
@@ -136,7 +129,7 @@ export default function SplitDashboard() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 whileHover={{ y: -8 }}
-                className="group rounded-3xl bg-zinc-900/50 border border-zinc-800/80 p-8 hover:bg-zinc-900 hover:border-violet-500/50 transition-all flex flex-col h-full shadow-lg"
+                className="group rounded-3xl bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/80 p-8 hover:bg-zinc-900 hover:border-violet-500/50 transition-all flex flex-col h-full shadow-lg"
               >
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors">
@@ -173,7 +166,7 @@ export default function SplitDashboard() {
         </section>
 
         {/* Skills & Experience Section */}
-        <section className="grid grid-cols-1 2xl:grid-cols-2 gap-16">
+        <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-16">
           
           {/* Experience Timeline */}
           <div>
@@ -219,7 +212,7 @@ export default function SplitDashboard() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-zinc-900/50 border border-zinc-800/80 rounded-2xl p-6"
+                  className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/80 rounded-2xl p-6"
                 >
                   <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">
                     {skillGroup.category}

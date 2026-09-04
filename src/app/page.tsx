@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Space_Grotesk } from 'next/font/google';
 import { motion } from 'framer-motion';
 import { 
   Mail, 
@@ -13,7 +14,11 @@ import {
 } from 'lucide-react';
 import DynamicCursorGrid from '@/components/DynamicCursorGrid';
 import ParticleText from '@/components/ParticleText';
+import StrokeText from '@/components/StrokeText';
+import TextType from '@/components/TextType';
 import { PERSONAL_INFO, PROJECTS, EXPERIENCE, SKILLS } from '@/data/portfolio';
+
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 
 export default function SplitDashboard() {
   return (
@@ -40,13 +45,34 @@ export default function SplitDashboard() {
         </div>
 
         <div className="flex flex-col items-center gap-6 -mt-10 sm:-mt-16 relative z-20">
-          <div className="flex flex-wrap justify-center gap-6 text-zinc-400 font-medium">
-            <span className="flex items-center gap-2">
-              <Briefcase size={18} className="text-violet-400" /> Full Stack Developer
-            </span>
-            <span className="flex items-center gap-2">
-              <MapPin size={18} className="text-emerald-400" /> {PERSONAL_INFO.education.location}
-            </span>
+          <div className="flex flex-row items-center justify-center w-full max-w-4xl mx-auto gap-8 mt-6">
+            <div className="w-1/2 max-w-[350px]">
+              <StrokeText
+                text="Software & AI Engineer"
+                strokeColor="#10b981"
+                fillColor="#a1a1aa"
+                fontSize={28}
+                strokeWidth={1}
+                letterSpacing={2}
+                trigger="mount"
+                fillMode="wipe"
+                className={spaceGrotesk.className}
+              />
+            </div>
+            <span className="text-zinc-600">•</span>
+            <div className="w-1/2 max-w-[350px]">
+              <StrokeText
+                text="Gandhinagar, Gujarat"
+                strokeColor="#10b981"
+                fillColor="#a1a1aa"
+                fontSize={28}
+                strokeWidth={1}
+                letterSpacing={2}
+                trigger="mount"
+                fillMode="wipe"
+                className={spaceGrotesk.className}
+              />
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
@@ -71,9 +97,9 @@ export default function SplitDashboard() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-2xl bg-[#0c0c0e]/90 backdrop-blur-md border border-zinc-800/80 p-6 lg:p-8 shadow-2xl font-mono text-sm sm:text-base overflow-hidden relative"
+            className="bg-white/[0.05] backdrop-blur-2xl border border-white/15 shadow-2xl shadow-black/50 rounded-xl relative overflow-hidden p-6 lg:p-8 font-mono text-sm sm:text-base"
           >
             {/* Fake macOS window controls */}
             <div className="flex gap-2 mb-6">
@@ -90,7 +116,7 @@ export default function SplitDashboard() {
               }}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               className="space-y-6 text-zinc-300"
             >
               <motion.div variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}>
@@ -98,7 +124,14 @@ export default function SplitDashboard() {
               </motion.div>
               
               <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="pl-4 border-l-2 border-zinc-800 text-zinc-400 leading-relaxed">
-                {PERSONAL_INFO.bio}
+                <TextType
+                  text={PERSONAL_INFO.bio}
+                  startOnVisible={true}
+                  loop={false}
+                  typingSpeed={3}
+                  showCursor={true}
+                  cursorCharacter="|"
+                />
               </motion.div>
               
               <motion.div variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}>
@@ -126,7 +159,7 @@ export default function SplitDashboard() {
                 key={project.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 whileHover={{ y: -8 }}
                 className="group rounded-3xl bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/80 p-8 hover:bg-zinc-900 hover:border-violet-500/50 transition-all flex flex-col h-full shadow-lg"
@@ -179,7 +212,7 @@ export default function SplitDashboard() {
                   key={exp.company}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: i * 0.1 }}
                   className="relative"
                 >
@@ -210,7 +243,7 @@ export default function SplitDashboard() {
                   key={skillGroup.category}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: i * 0.1 }}
                   className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/80 rounded-2xl p-6"
                 >

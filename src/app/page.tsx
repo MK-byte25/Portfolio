@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Space_Grotesk } from 'next/font/google';
+import { Space_Grotesk, Geist } from 'next/font/google';
 import { motion } from 'framer-motion';
 import { 
   Mail, 
@@ -12,20 +12,32 @@ import {
   Terminal, 
   ExternalLink 
 } from 'lucide-react';
-import DynamicCursorGrid from '@/components/DynamicCursorGrid';
+import AcidSquares from '@/components/AcidSquares';
 import ParticleText from '@/components/ParticleText';
 import StrokeText from '@/components/StrokeText';
 import TextType from '@/components/TextType';
 import { PERSONAL_INFO, PROJECTS, EXPERIENCE, SKILLS } from '@/data/portfolio';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
+const geist = Geist({ subsets: ['latin'] });
 
 export default function SplitDashboard() {
   return (
-    <div className="min-h-screen w-full bg-zinc-950 text-zinc-100 flex flex-col items-center font-sans selection:bg-violet-500/30 relative">
+    <div className="min-h-screen w-full bg-black text-zinc-100 flex flex-col items-center font-sans selection:bg-violet-500/30 relative z-10 pointer-events-none">
       
-      {/* Dynamic Cursor Grid Background */}
-      <DynamicCursorGrid />
+      {/* Acid Squares Background */}
+      <div className="fixed inset-0 w-full h-full z-[-1] pointer-events-auto">
+        <AcidSquares 
+          key="dark-blue-theme-darker-cyan"
+          color1="#000000"
+          color2="#0c4a6e"
+          color3="#0284c7"
+          speed={0.5}
+          exposure={2000}
+          mouseInteraction={true}
+          opacity={1.0}
+        />
+      </div>
 
       {/* HERO SECTION */}
       <section className="w-full min-h-[60vh] flex flex-col items-center justify-center relative z-10 pt-20">
@@ -75,7 +87,7 @@ export default function SplitDashboard() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 pointer-events-auto">
             <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-violet-500/50 hover:text-violet-400 transition-all shadow-sm">
               <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
             </a>
@@ -149,8 +161,8 @@ export default function SplitDashboard() {
 
         {/* Projects Bento Grid */}
         <section className="w-full">
-          <h2 className="text-3xl font-bold text-white mb-10 flex items-center gap-3">
-            <Code className="text-violet-500" size={32} /> Featured Projects
+          <h2 className={`text-4xl font-bold text-white mb-10 flex items-center gap-4 ${geist.className}`}>
+            <Code className="text-violet-500" size={36} /> Featured Projects
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -161,11 +173,10 @@ export default function SplitDashboard() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                whileHover={{ y: -8 }}
-                className="group rounded-3xl bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/80 p-8 hover:bg-zinc-900 hover:border-violet-500/50 transition-all flex flex-col h-full shadow-lg"
+                className="group flex flex-col h-full pointer-events-auto bg-zinc-950/60 backdrop-blur-sm border border-white/5 rounded-xl p-6 transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-900/20 cursor-pointer"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold text-white group-hover:text-violet-400 transition-colors">
+                  <h3 className={`text-2xl font-bold text-white group-hover:text-violet-400 transition-colors ${geist.className}`}>
                     {project.title}
                   </h3>
                   <div className="flex gap-3">
@@ -182,7 +193,7 @@ export default function SplitDashboard() {
                   </div>
                 </div>
                 
-                <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-8 flex-1">
+                <p className={`text-sm text-zinc-400 leading-relaxed mb-8 flex-1 mt-2 ${spaceGrotesk.className}`}>
                   {project.description[0]}
                 </p>
                 
@@ -203,8 +214,8 @@ export default function SplitDashboard() {
           
           {/* Experience Timeline */}
           <div>
-            <h2 className="text-3xl font-bold text-white mb-10 flex items-center gap-3">
-              <Calendar className="text-violet-500" size={32} /> Experience
+            <h2 className={`text-4xl font-bold text-white mb-10 flex items-center gap-4 ${geist.className}`}>
+              <Calendar className="text-violet-500" size={36} /> Experience
             </h2>
             <div className="space-y-10 border-l-2 border-zinc-800/80 ml-3 pl-8 py-2">
               {EXPERIENCE.map((exp, i) => (
@@ -219,12 +230,12 @@ export default function SplitDashboard() {
                   {/* Timeline Dot */}
                   <div className="absolute -left-[41px] top-1.5 h-4 w-4 rounded-full bg-zinc-950 border-2 border-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.5)]"></div>
                   
-                  <h3 className="font-bold text-white text-xl">{exp.role}</h3>
+                  <h3 className={`font-bold text-white text-xl ${geist.className}`}>{exp.role}</h3>
                   <h4 className="text-violet-400 font-bold mt-1 mb-2">{exp.company}</h4>
                   <p className="text-xs text-zinc-500 mb-4 flex items-center gap-2 uppercase tracking-wider font-bold">
                      {exp.date} &bull; {exp.location}
                   </p>
-                  <p className="text-sm text-zinc-400 leading-relaxed">
+                  <p className={`text-sm text-zinc-400 leading-relaxed ${spaceGrotesk.className}`}>
                     {exp.description[0]}
                   </p>
                 </motion.div>
@@ -234,8 +245,8 @@ export default function SplitDashboard() {
 
           {/* Skills Matrix */}
           <div>
-            <h2 className="text-3xl font-bold text-white mb-10 flex items-center gap-3">
-              <Terminal className="text-emerald-500" size={32} /> Tech Stack
+            <h2 className={`text-4xl font-bold text-white mb-10 flex items-center gap-4 ${geist.className}`}>
+              <Terminal className="text-emerald-500" size={36} /> Tech Stack
             </h2>
             <div className="space-y-6">
               {SKILLS.map((skillGroup, i) => (
@@ -247,14 +258,14 @@ export default function SplitDashboard() {
                   transition={{ delay: i * 0.1 }}
                   className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/80 rounded-2xl p-6"
                 >
-                  <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4">
+                  <h3 className={`text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4 ${geist.className}`}>
                     {skillGroup.category}
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {skillGroup.items.map(skill => (
                       <span 
                         key={skill} 
-                        className="px-4 py-2 bg-zinc-950 border border-zinc-800/80 text-zinc-300 font-medium rounded-xl text-sm hover:border-emerald-500/50 hover:text-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all cursor-default"
+                        className={`px-4 py-2 bg-zinc-950 border border-zinc-800/80 text-zinc-300 font-medium rounded-xl text-sm hover:border-emerald-500/50 hover:text-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all cursor-default pointer-events-auto ${spaceGrotesk.className}`}
                       >
                         {skill}
                       </span>

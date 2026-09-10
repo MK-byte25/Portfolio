@@ -16,6 +16,7 @@ import AcidSquares from '@/components/AcidSquares';
 import ParticleText from '@/components/ParticleText';
 import StrokeText from '@/components/StrokeText';
 import TextType from '@/components/TextType';
+import { MacbookScroll } from '@/components/ui/macbook-scroll';
 import { PERSONAL_INFO, PROJECTS, EXPERIENCE, SKILLS } from '@/data/portfolio';
 
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
@@ -104,63 +105,163 @@ export default function SplitDashboard() {
       {/* MAIN CONTENT STACK */}
       <main className="w-full max-w-5xl px-6 lg:px-12 flex flex-col items-center mt-8 sm:mt-16 space-y-24 relative z-10 pb-32">
         
-        {/* Terminal Hero Section */}
-        <section className="w-full">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="bg-white/[0.05] backdrop-blur-2xl border border-white/15 shadow-2xl shadow-black/50 rounded-xl relative overflow-hidden p-6 lg:p-8 font-mono text-sm sm:text-base"
-          >
-            {/* Fake macOS window controls */}
-            <div className="flex gap-2 mb-6">
-              <div className="w-3.5 h-3.5 rounded-full bg-red-500/80"></div>
-              <div className="w-3.5 h-3.5 rounded-full bg-yellow-500/80"></div>
-              <div className="w-3.5 h-3.5 rounded-full bg-green-500/80"></div>
-            </div>
-            
-            {/* Typing Animation Sequence */}
+        {/* Macbook Scroll Section */}
+        <div className="relative w-full flex flex-col items-center justify-center overflow-hidden">
+          <MacbookScroll>
             <motion.div 
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.4 } }
-              }}
-              initial="hidden"
-              whileInView="visible"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
-              className="space-y-6 text-zinc-300"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="bg-[#000000]/80 backdrop-blur-2xl border border-white/20 shadow-2xl shadow-black/50 relative overflow-hidden w-full h-full rounded-lg flex flex-col font-mono text-xs sm:text-sm text-zinc-300"
             >
-              <motion.div variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}>
-                <span className="text-violet-400 font-bold">maharshi@portfolio</span>:<span className="text-blue-400">~</span>$ cat intro.txt
-              </motion.div>
-              
-              <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="pl-4 border-l-2 border-zinc-800 text-zinc-400 leading-relaxed">
-                <TextType
-                  text={PERSONAL_INFO.bio}
-                  startOnVisible={true}
-                  loop={false}
-                  typingSpeed={3}
-                  showCursor={true}
-                  cursorCharacter="|"
-                />
-              </motion.div>
-              
-              <motion.div variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}>
-                <span className="text-violet-400 font-bold">maharshi@portfolio</span>:<span className="text-blue-400">~</span>$ ./execute_skills.sh
-              </motion.div>
-              
-              <motion.div variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }} className="text-emerald-400 flex items-center gap-2 font-bold">
-                <Terminal size={16} /> 
-                Initialization complete. Ready to build.
-                <span className="animate-pulse inline-block w-2.5 h-5 bg-emerald-400 ml-1 translate-y-[2px]"></span>
-              </motion.div>
+              <div className="bg-[#181818] relative overflow-hidden w-full h-full rounded-lg flex flex-col font-sans text-xs text-[#cccccc] shadow-2xl border border-[#333333]">
+                {/* Title Bar */}
+                <div className="flex items-center justify-between px-3 h-7 shrink-0 bg-[#181818]">
+                  <div className="flex items-center gap-4">
+                    <div className="flex gap-2">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+                    </div>
+                    <div className="hidden sm:flex gap-4 text-[10px] text-[#cccccc]">
+                      <span className="hover:text-white cursor-pointer">File</span>
+                      <span className="hover:text-white cursor-pointer">Edit</span>
+                      <span className="hover:text-white cursor-pointer">Selection</span>
+                      <span className="hover:text-white cursor-pointer">View</span>
+                      <span className="hover:text-white cursor-pointer">Go</span>
+                      <span className="hover:text-white cursor-pointer">Run</span>
+                      <span className="hover:text-white cursor-pointer">Terminal</span>
+                      <span className="hover:text-white cursor-pointer">Help</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 text-[#cccccc] opacity-70">
+                    <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+                  </div>
+                </div>
+
+                {/* Main Content */}
+                <div className="flex flex-1 overflow-hidden">
+                  {/* Activity Bar */}
+                  <div className="w-10 shrink-0 bg-[#181818] border-r border-[#2b2b2b] flex flex-col justify-between py-2 items-center">
+                    <div className="flex flex-col gap-4">
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-white"><rect x="3" y="3" width="13" height="13" rx="1"/><rect x="8" y="8" width="13" height="13" rx="1"/></svg>
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-[#858585]"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-[#858585]"><circle cx="6" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="12" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h6M15 9l3 3-3 3"/></svg>
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-[#858585]"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-[#858585]"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-[#858585]"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-[#858585]"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </div>
+                  </div>
+
+                  {/* Sidebar */}
+                  <div className="w-36 shrink-0 bg-[#181818] flex flex-col border-r border-[#2b2b2b]">
+                    <div className="px-3 py-2 text-[9px] tracking-widest text-[#cccccc] font-sans">EXPLORER</div>
+                    <div className="flex flex-col font-mono text-[10px] text-[#cccccc]">
+                      <div className="flex items-center gap-1 px-1 py-0.5 font-bold cursor-pointer hover:bg-[#2a2d2e] min-w-0">
+                        <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none" className="shrink-0"><polyline points="6 9 12 15 18 9"/></svg>
+                        <span className="truncate">my-resume</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 pl-3 py-0.5 cursor-pointer hover:bg-[#2a2d2e] min-w-0">
+                        <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none" className="shrink-0"><polyline points="6 9 12 15 18 9"/></svg>
+                        <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none" className="shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                        <span className="truncate">assets</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 pl-6 py-0.5 cursor-pointer hover:bg-[#2a2d2e] text-[#cccccc] min-w-0">
+                        <span className="text-[#519aba] shrink-0 text-[10px]">🖼</span>
+                        <span className="truncate">profile.jpg</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 pl-3 py-0.5 cursor-pointer bg-[#37373d] text-white min-w-0">
+                        <span className="text-[#858585] shrink-0 text-[10px]">📄</span>
+                        <span className="truncate">intro.txt</span>
+                      </div>
+
+                      {["education", "skills", "projects", "experience", "leadership", "awards"].map((folder) => (
+                        <div key={folder} className="flex items-center gap-1 pl-3 py-0.5 cursor-pointer hover:bg-[#2a2d2e] min-w-0">
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none" className="shrink-0"><polyline points="9 18 15 12 9 6"/></svg>
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none" className="shrink-0"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                          <span className="truncate">{folder}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Editor & Terminal Area */}
+                  <div className="flex flex-col flex-1 bg-[#1e1e1e] min-w-0 overflow-hidden">
+                    {/* Editor Tabs */}
+                    <div className="flex bg-[#181818] h-7 shrink-0">
+                      <div className="px-3 bg-[#1e1e1e] border-t-[1.5px] border-[#007acc] flex items-center gap-2 border-r border-[#2b2b2b] text-[#cccccc] cursor-pointer min-w-0">
+                        <span className="text-[#858585] text-[10px] shrink-0">📄</span>
+                        <span className="truncate text-[10px] font-mono">intro.txt</span>
+                        <span className="ml-1 hover:bg-[#333333] rounded p-0.5 text-[#858585]">
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" strokeWidth="2" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </span>
+                      </div>
+                      <div className="flex-1 flex justify-end items-center px-2 gap-2">
+                        <svg viewBox="0 0 24 24" width="10" height="10" stroke="#cccccc" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+                        <svg viewBox="0 0 24 24" width="10" height="10" stroke="#cccccc" fill="none"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                      </div>
+                    </div>
+
+                    {/* Editor Content */}
+                    <div className="flex-1 px-3 py-2 overflow-hidden flex font-mono text-[10px] leading-relaxed text-[#d4d4d4]">
+                      <div className="w-5 shrink-0 text-right pr-2 text-[#858585] select-none text-[10px]">
+                        1
+                      </div>
+                      <div className="flex-1 whitespace-pre-wrap">
+                        <TextType
+                          text="Hello! I'm Maharshi Karpatiya, a third-year Computer Science student at Pandit Deendayal Energy University, Gandhinagar. I'm passionate about building scalable and user-centric applications, and I enjoy solving real-world problems with code. Currently, I'm focused on strengthening my skills in web development, artificial intelligence, and data structures and algorithms. I'm always eager to learn, collaborate, and take on new challenges."
+                          startOnVisible={true}
+                          loop={false}
+                          typingSpeed={1}
+                          showCursor={true}
+                          cursorCharacter="|"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Terminal */}
+                    <div className="h-24 shrink-0 border-t border-[#2b2b2b] bg-[#1e1e1e] flex flex-col">
+                      <div className="flex h-7 items-center justify-between px-3">
+                        <div className="flex gap-4 text-[9px] font-sans tracking-wide text-[#858585]">
+                          <span className="hover:text-[#cccccc] cursor-pointer hidden sm:block">PROBLEMS</span>
+                          <span className="hover:text-[#cccccc] cursor-pointer hidden sm:block">OUTPUT</span>
+                          <span className="hover:text-[#cccccc] cursor-pointer hidden md:block">DEBUG CONSOLE</span>
+                          <span className="text-[#cccccc] border-b border-[#cccccc] h-7 flex items-center cursor-pointer">TERMINAL</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-[#858585]">
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none"><path d="M12 5v14M5 12h14"/></svg>
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none"><polyline points="6 9 12 15 18 9"/></svg>
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" fill="none"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" strokeWidth="2" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 px-3 py-1 font-mono text-[10px] text-[#cccccc] overflow-hidden">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[#cccccc] truncate">PS C:\Users\Maharshi\my-resume&gt; type intro.txt</span>
+                        </div>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <span className="text-[#cccccc]">PS C:\Users\Maharshi\my-resume&gt;</span>
+                          <span className="w-1.5 h-3 bg-[#cccccc] animate-pulse"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
-        </section>
+          </MacbookScroll>
+        </div>
 
         {/* Projects Bento Grid */}
-        <section className="w-full">
+        <section className="w-full relative z-10 mt-24">
           <h2 className={`text-4xl font-bold text-white mb-10 flex items-center gap-4 ${geist.className}`}>
             <Code className="text-violet-500" size={36} /> Featured Projects
           </h2>

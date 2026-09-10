@@ -47,6 +47,18 @@ export const PROJECTS = [
       "Developed an emergency routing algorithm to automatically identify and contact the nearest registered donors in real-time when required blood types are unavailable in the central inventory.",
       "Designed scalable backend architectures and schemas using Python and PostgreSQL, ensuring high availability and the secure handling of sensitive donor medical records and contact information."
     ]
+  },
+  {
+    title: "Intelligent Land Record Digitization & Validation System",
+    stack: ["Python", "AI/ML", "OCR", "PostGIS"],
+    github: "https://github.com/MindSpark26/Intelligent_Land_Record_Digitization_and_Validation_System.git",
+    live: "",
+    date: "Jun 2026 – Jul 2026",
+    description: [
+      "Engineered an AI-powered Land Record Intelligence platform to digitize and extract structured data from multilingual legacy documents utilizing PaddleOCR and TrOCR.",
+      "Fine-tuned an IndicNER (Named Entity Recognition) model to extract standardized property data, implementing RapidFuzz and algorithmic domain rules for accurate multilingual entity resolution.",
+      "Architected a Digital Land Twin ecosystem featuring a 4-level validation engine and PostGIS spatial integration to automatically detect ownership conflicts, missing links, and document tampering risk."
+    ]
   }
 ];
 
